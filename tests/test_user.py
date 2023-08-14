@@ -6,6 +6,14 @@ import datetime
 from uuid import UUID
 
 class TestUser(unittest.TestCase):
+        """ """
+
+
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = 'User'
+        self.value = User
 
     def setUp(self):
         """

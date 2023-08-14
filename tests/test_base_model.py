@@ -8,6 +8,13 @@ import json
 import os
 
 class TestBaseModel(unittest.TestCase):
+        """ """
+
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = 'BaseModel'
+        self.value = BaseModel
 
     def setUp(self):
         """

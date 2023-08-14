@@ -6,6 +6,13 @@ import json
 import os
 
 class TestFileStorage(unittest.TestCase):
+        """ """
+
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = 'FileStorage'
+        self.value = FileStorage
 
     def setUp(self):
         """
