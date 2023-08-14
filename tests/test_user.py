@@ -1,78 +1,67 @@
 #!/usr/bin/python3
 
-import unittest
+from tests.test_models.test_base_model import test_basemodel
 from models.user import User
-import datetime
-from uuid import UUID
 
-class TestUser(unittest.TestCase):
-        """ """
+class TestUser(test_basemodel):
+    """
+    Test class for the User model.
 
+    This class contains unit tests for the attributes of the User model,
+    such as first_name, last_name, email, and password.
+    """
 
     def __init__(self, *args, **kwargs):
-        """ """
+        """Initialize TestUser class."""
         super().__init__(*args, **kwargs)
-        self.name = 'User'
-        self.value = User
+        self.name = "User"
+        self.user_class = User
 
-    def setUp(self):
+    def test_first_name(self):
         """
-        Set up a fresh instance of User for each test.
-        """
-        self.test_user = User()
+        Test the first_name attribute of the User.
 
-    def test_subclass(self):
+        This test checks whether the first_name attribute of a User instance
+        is of type str.
         """
-        Test if User is a subclass of BaseModel.
-        """
-        self.assertTrue(issubclass(User, BaseModel))
+        new_user = self.user_class()
+        self.assertEqual(type(new_user.first_name), str)
 
-    def test_has_attributes(self):
+    def test_last_name(self):
         """
-        Test if the User instance has the expected attributes.
-        """
-        self.assertTrue(hasattr(self.test_user, 'email'))
-        self.assertTrue(hasattr(self.test_user, 'password'))
-        self.assertTrue(hasattr(self.test_user, 'first_name'))
-        self.assertTrue(hasattr(self.test_user, 'last_name'))
+        Test the last_name attribute of the User.
 
-    def test_id_is_valid_uuid(self):
+        This test checks whether the last_name attribute of a User instance
+        is of type str.
         """
-        Test if the 'id' attribute is a valid UUID.
-        """
-        self.assertTrue(UUID(self.test_user.id))
+        new_user = self.user_class()
+        self.assertEqual(type(new_user.last_name), str)
 
-    def test_created_at_is_datetime(self):
+    def test_email(self):
         """
-        Test if the 'created_at' attribute is of datetime type.
-        """
-        self.assertIsInstance(self.test_user.created_at, datetime.datetime)
+        Test the email attribute of the User.
 
-    def test_updated_at_is_datetime(self):
+        This test checks whether the email attribute of a User instance
+        is of type str.
         """
-        Test if the 'updated_at' attribute is of datetime type.
-        """
-        self.assertIsInstance(self.test_user.updated_at, datetime.datetime)
+        new_user = self.user_class()
+        self.assertEqual(type(new_user.email), str)
 
-    def test_to_dict_contains_correct_keys(self):
+    def test_password(self):
         """
-        Test if the 'to_dict' method returns a dictionary with expected keys.
-        """
-        model_dict = self.test_user.to_dict()
-        self.assertIn('email', model_dict)
-        self.assertIn('password', model_dict)
-        self.assertIn('first_name', model_dict)
-        self.assertIn('last_name', model_dict)
+        Test the password attribute of the User.
 
-    def test_str_representation(self):
+        This test checks whether the password attribute of a User instance
+        is of type str.
         """
-        Test if the string representation of User contains expected information.
-        """
-        str_repr = str(self.test_user)
-        self.assertIn("[User]", str_repr)
-        self.assertIn("id", str_repr)
-        self.assertIn(str(self.test_user.id), str_repr)
+        new_user = self.user_class()
+        self.assertEqual(type(new_user.password), str)
 
-if __name__ == '__main__':
-    unittest.main()
 
+# Example of how to use the TestUser class:
+if __name__ == "__main__":
+    test_user_instance = TestUser()
+    test_user_instance.test_first_name()
+    test_user_instance.test_last_name()
+    test_user_instance.test_email()
+    test_user_instance.test_password()

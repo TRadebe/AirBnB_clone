@@ -1,72 +1,47 @@
 #!/usr/bin/python3
+"""A test module for the City class."""
 
-import unittest
+from tests.test_models.test_base_model import test_basemodel
 from models.city import City
-import datetime
-from uuid import UUID
 
-class TestCity(unittest.TestCase):
-        """ """
 
-        def __init__(self, *args, **kwargs):
-        """ """
+class TestCity(test_basemodel):
+    """
+    Test class for the City model.
+
+    This class contains unit tests for the attributes of the City model,
+    specifically the 'state_id' and 'name' attributes.
+    """
+
+    def __init__(self, *args, **kwargs):
+        """Initialize TestCity class."""
         super().__init__(*args, **kwargs)
-        self.name = 'City'
-        self.value = City
+        self.model_name = "City"
+        self.city_class = City
 
-    def setUp(self):
+    def test_state_id(self):
         """
-        Set up a fresh instance of City for each test.
-        """
-        self.test_city = City()
+        Test the state_id attribute of the City.
 
-    def test_subclass(self):
+        This test checks whether the state_id attribute of a City instance
+        is of type str.
         """
-        Test if City is a subclass of BaseModel.
-        """
-        self.assertTrue(issubclass(City, BaseModel))
+        new_city = self.city_class()
+        self.assertEqual(type(new_city.state_id), str)
 
-    def test_has_attributes(self):
+    def test_name(self):
         """
-        Test if the City instance has the expected attributes.
-        """
-        self.assertTrue(hasattr(self.test_city, 'name'))
-        self.assertTrue(hasattr(self.test_city, 'state_id'))
+        Test the name attribute of the City.
 
-    def test_id_is_valid_uuid(self):
+        This test checks whether the name attribute of a City instance
+        is of type str.
         """
-        Test if the 'id' attribute is a valid UUID.
-        """
-        self.assertTrue(UUID(self.test_city.id))
+        new_city = self.city_class()
+        self.assertEqual(type(new_city.name), str)
 
-    def test_created_at_is_datetime(self):
-        """
-        Test if the 'created_at' attribute is of datetime type.
-        """
-        self.assertIsInstance(self.test_city.created_at, datetime.datetime)
 
-    def test_updated_at_is_datetime(self):
-        """
-        Test if the 'updated_at' attribute is of datetime type.
-        """
-        self.assertIsInstance(self.test_city.updated_at, datetime.datetime)
-
-    def test_to_dict_contains_correct_keys(self):
-        """
-        Test if the 'to_dict' method returns a dictionary with expected keys.
-        """
-        model_dict = self.test_city.to_dict()
-        self.assertIn('name', model_dict)
-        self.assertIn('state_id', model_dict)
-
-    def test_str_representation(self):
-        """
-        Test if the string representation of City contains expected information.
-        """
-        str_repr = str(self.test_city)
-        self.assertIn("[City]", str_repr)
-        self.assertIn("id", str_repr)
-        self.assertIn(str(self.test_city.id), str_repr)
-
-if __name__ == '__main__':
-    unittest.main()
+# Example of how to use the TestCity class:
+if __name__ == "__main__":
+    test_city_instance = TestCity()
+    test_city_instance.test_state_id()
+    test_city_instance.test_name()

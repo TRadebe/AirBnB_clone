@@ -1,72 +1,58 @@
 #!/usr/bin/python3
+"""A test module for the Review class."""
 
 from tests.test_models.test_base_model import test_basemodel
 from models.review import Review
 
-class TestReview(unittest.TestCase):
-        """ """
 
-        def __init__(self, *args, **kwargs):
-        """ """
+class TestReview(test_basemodel):
+    """
+    Test class for the Review model.
+
+    This class contains unit tests for the attributes of the Review model,
+    such as place_id, user_id, and text.
+    """
+
+    def __init__(self, *args, **kwargs):
+        """Initialize TestReview class."""
         super().__init__(*args, **kwargs)
-        self.name = 'Review'
-        self.value = Review
+        self.name = "Review"
+        self.review_class = Review
 
-    def setUp(self):
+    def test_place_id(self):
         """
-        Set up a fresh instance of Review for each test.
-        """
-        self.test_review = Review()
+        Test the place_id attribute of the Review.
 
-    def test_subclass(self):
+        This test checks whether the place_id attribute of a Review instance
+        is of type str.
         """
-        Test if Review is a subclass of BaseModel.
-        """
-        self.assertTrue(issubclass(Review, BaseModel))
+        new_review = self.review_class()
+        self.assertEqual(type(new_review.place_id), str)
 
-    def test_has_attributes(self):
+    def test_user_id(self):
         """
-        Test if the Review instance has the expected attributes.
-        """
-        self.assertTrue(hasattr(self.test_review, 'place_id'))
-        self.assertTrue(hasattr(self.test_review, 'user_id'))
-        self.assertTrue(hasattr(self.test_review, 'text'))
+        Test the user_id attribute of the Review.
 
-    def test_id_is_valid_uuid(self):
+        This test checks whether the user_id attribute of a Review instance
+        is of type str.
         """
-        Test if the 'id' attribute is a valid UUID.
-        """
-        self.assertTrue(UUID(self.test_review.id))
+        new_review = self.review_class()
+        self.assertEqual(type(new_review.user_id), str)
 
-    def test_created_at_is_datetime(self):
+    def test_text(self):
         """
-        Test if the 'created_at' attribute is of datetime type.
-        """
-        self.assertIsInstance(self.test_review.created_at, datetime.datetime)
+        Test the text attribute of the Review.
 
-    def test_updated_at_is_datetime(self):
+        This test checks whether the text attribute of a Review instance
+        is of type str.
         """
-        Test if the 'updated_at' attribute is of datetime type.
-        """
-        self.assertIsInstance(self.test_review.updated_at, datetime.datetime)
+        new_review = self.review_class()
+        self.assertEqual(type(new_review.text), str)
 
-    def test_to_dict_contains_correct_keys(self):
-        """
-        Test if the 'to_dict' method returns a dictionary with expected keys.
-        """
-        model_dict = self.test_review.to_dict()
-        self.assertIn('place_id', model_dict)
-        self.assertIn('user_id', model_dict)
-        self.assertIn('text', model_dict)
 
-    def test_str_representation(self):
-        """
-        Test if the string representation of Review contains expected information.
-        """
-        str_repr = str(self.test_review)
-        self.assertIn("[Review]", str_repr)
-        self.assertIn("id", str_repr)
-        self.assertIn(str(self.test_review.id), str_repr)
-
-if __name__ == '__main__':
-    unittest.main()
+# Example of how to use the TestReview class:
+if __name__ == "__main__":
+    test_review_instance = TestReview()
+    test_review_instance.test_place_id()
+    test_review_instance.test_user_id()
+    test_review_instance.test_text()
